@@ -35,3 +35,6 @@ git config --global receive.fsckobjects true
 
 # Overwrite https with git for all github.com urls
 git config --global url."git@github.com:".insteadOf "https://github.com/"
+
+# Autoamtically force-update ref branches
+git config --global --add --bool rebase.updateRefs true
