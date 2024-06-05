@@ -35,3 +35,6 @@ git config --global receive.fsckobjects true
 
 # Autoamtically force-update ref branches
 git config --global --add --bool rebase.updateRefs true
+
+# Alias to add, commit & push
+git config --global alias.acp '!git add . && git commit -m "$1" && git push'
