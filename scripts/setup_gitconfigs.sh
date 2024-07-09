@@ -37,10 +37,10 @@ git config --global receive.fsckobjects true
 git config --global --add --bool rebase.updateRefs true
 
 # Alias to add, commit & push
-git config --global alias.acp '!f() { git add . && git commit -m "$1" && git push; }; f'
+git config --global alias.acp '!f() { git add . && git commit -m "$1" && git pull ; git push; }; f'
 
 # Alias to push, checkout staging & pull
-git config --global alias.staging '!f() { git push ; git checkout staging && git pull;}; f'
+git config --global alias.staging '!f() { git pull; git push ; git checkout staging && git pull;}; f'
 
 # Disable lock validation
 git config --global lfs.locksverify false
