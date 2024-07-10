@@ -42,5 +42,8 @@ git config --global alias.acp '!f() { git add . && git commit -m "$1" && git pul
 # Alias to push, checkout staging & pull
 git config --global alias.staging '!f() { git pull; git push ; git checkout staging && git pull;}; f'
 
+# Alias to quickly create a new branch
+git config --global alias.b '!f() { git add . && git checkout -b "$1"; }; f'
+
 # Disable lock validation
 git config --global lfs.locksverify false
