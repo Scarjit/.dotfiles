@@ -129,6 +129,35 @@ echo "💨 Enabling untracked file caching for performance"
 git config --global core.untrackedCache true
 
 # =============================================================================
+# COMMIT AND EDITING IMPROVEMENTS
+# =============================================================================
+
+# Show diff in commit message editor for better context
+echo "📝 Enabling verbose commit messages (shows diff)"
+git config --global commit.verbose true
+
+# Ensure consistent line endings across platforms
+echo "🔄 Setting consistent line ending handling"
+git config --global core.autocrlf false
+
+# Use ISO date format in logs (more readable)
+echo "📅 Setting ISO date format for logs"
+git config --global log.date iso
+
+# =============================================================================
+# URL SHORTCUTS FOR COMMON GIT HOSTS
+# =============================================================================
+
+# Use SSH instead of HTTPS for GitHub (avoids password prompts)
+echo "🔑 Setting up SSH shortcuts for GitHub"
+git config --global url."git@github.com:".insteadOf "https://github.com/"
+
+# Optional: Add shortcuts for common Git operations
+echo "⚡ Setting up Git URL shortcuts"
+git config --global url."git@github.com:".insteadOf "gh:"
+git config --global url."git@gitlab.com:".insteadOf "gl:"
+
+# =============================================================================
 # SECURITY AND INTEGRITY
 # =============================================================================
 
@@ -165,26 +194,49 @@ git config --global lfs.locksverify false
 # CUSTOM ALIASES
 # =============================================================================
 
-# Alias to list all configured aliases
-echo "📋 Adding alias: 'alias' (lists all git aliases)"
+# Essential shorthand aliases (very common)
+echo "⚡ Adding common shorthand aliases"
+git config --global alias.st status
+git config --global alias.co checkout
+git config --global alias.br branch
+git config --global alias.ci commit
+
+# Utility aliases
+echo "📋 Adding utility aliases"
 git config --global alias.alias '!git config --get-regexp ^alias\. | sed "s/^alias\.//" | sort'
+git config --global alias.unstage 'reset HEAD --'
+git config --global alias.last 'log -1 HEAD'
+git config --global alias.root 'rev-parse --show-toplevel'
 
-# Alias to add, commit & push
-echo "⚡ Adding alias: 'acp' (add, commit, pull, push)"
+# Branch and tag listing aliases
+echo "📂 Adding listing aliases"
+git config --global alias.branches 'branch --all'
+git config --global alias.tags 'tag --list'
+git config --global alias.remotes 'remote --verbose'
+
+# Enhanced log aliases
+echo "📊 Adding enhanced log aliases"
+git config --global alias.lg "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+git config --global alias.lga "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --all"
+
+# Safe force push
+echo "🛡️  Adding safe force push alias"
+git config --global alias.pushf 'push --force-with-lease --force-if-includes'
+
+# Quick amend without editing message
+echo "🔧 Adding quick amend alias"
+git config --global alias.oops 'commit --amend --no-edit'
+
+# Workflow aliases (your existing ones)
+echo "🔄 Adding workflow aliases"
 git config --global alias.acp '!f() { git add . && git commit -m "$1" && git pull ; git push; }; f'
-
-# Alias to add, commit & push with --no-verify
-echo "⚡ Adding alias: 'acps' (add, commit, pull, push with --no-verify)"
 git config --global alias.acps '!f() { git add . && git commit --no-verify -m "$1" && git pull ; git push --no-verify; }; f'
-
-# Alias to push, checkout staging & pull
-echo "🎭 Adding alias: 'staging' (push, checkout staging, pull)"
 git config --global alias.staging '!f() { git pull; git push ; git checkout staging && git pull;}; f'
-
-# Alias to push, checkout master & pull
-echo "🎭 Adding alias: 'master' (push, checkout master, pull)"
 git config --global alias.master '!f() { git pull; git push ; git checkout master && git pull;}; f'
-
-# Alias to quickly create a new branch
-echo "🌿 Adding alias: 'b' (quick branch creation)"
 git config --global alias.b '!f() { git add . && git checkout -b "$1"; }; f'
+
+# Advanced aliases
+echo "🚀 Adding advanced aliases"
+git config --global alias.cleanup '!git branch --merged | grep -E -v "(^\*|main|master|staging)" | xargs -n 1 git branch -d'
+git config --global alias.contributors 'shortlog --summary --numbered'
+git config --global alias.find '!git log --pretty="format:%Cgreen%H %Cblue%s" --name-status --grep'
