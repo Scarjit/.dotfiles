@@ -20,6 +20,14 @@ git config --global core.excludesfile ~/.gitignore
 echo "📤 Enabling automatic remote tracking branch setup"
 git config --global push.autosetupremote true
 
+# Use simple push strategy (only push current branch to its upstream)
+echo "🎯 Setting push strategy to 'simple' for safer pushes"
+git config --global push.default simple
+
+# Automatically push tags along with commits
+echo "🏷️  Enabling automatic tag pushing with commits"
+git config --global push.followTags true
+
 # Configures `git pull` to rebase instead of merge by default.
 echo "🔄 Setting git pull to rebase by default"
 git config --global pull.rebase true
@@ -32,9 +40,45 @@ git config --global merge.conflictstyle diff3
 echo "🧠 Enabling reuse recorded resolution (rerere)"
 git config --global rerere.enabled true
 
+# Automatically stage rerere resolutions
+echo "⚡ Enabling automatic rerere staging"
+git config --global rerere.autoupdate true
+
 # Automatically force-update ref branches
 echo "🔗 Enabling automatic ref branch updates during rebase"
 git config --global --add --bool rebase.updateRefs true
+
+# Auto-stash before rebasing
+echo "💾 Enabling automatic stash before rebase"
+git config --global rebase.autoStash true
+
+# Enable autosquash for interactive rebases
+echo "🔧 Enabling autosquash for interactive rebases"
+git config --global rebase.autoSquash true
+
+# Remove .orig backup files after merge conflicts
+echo "🗑️  Disabling backup files during merge conflicts"
+git config --global merge.keepBackup false
+
+# =============================================================================
+# BRANCH AND TAG MANAGEMENT
+# =============================================================================
+
+# Sort branches by most recent commit date
+echo "📅 Setting branch sort to most recent commit date"
+git config --global branch.sort -committerdate
+
+# Sort tags by version (semantic versioning)
+echo "🏷️  Setting tag sort to version format"
+git config --global tag.sort version:refname
+
+# Automatically prune deleted remote branches during fetch
+echo "🧹 Enabling automatic cleanup of deleted remote branches"
+git config --global fetch.prune true
+
+# Automatically prune deleted remote tags during fetch
+echo "🏷️  Enabling automatic cleanup of deleted remote tags"
+git config --global fetch.pruneTags true
 
 # =============================================================================
 # DIFF AND DISPLAY SETTINGS
@@ -44,9 +88,45 @@ git config --global --add --bool rebase.updateRefs true
 echo "📊 Setting diff algorithm to histogram"
 git config --global diff.algorithm histogram
 
+# Highlight moved code differently in diffs
+echo "🎨 Enabling moved code highlighting in diffs"
+git config --global diff.colorMoved plain
+
+# Use meaningful prefixes in diff output
+echo "📝 Enabling meaningful diff prefixes"
+git config --global diff.mnemonicPrefix true
+
+# Better rename detection in diffs
+echo "🔄 Enabling improved rename detection"
+git config --global diff.renames true
+
+# Follow file renames in git log
+echo "👁️  Enabling file rename following in log"
+git config --global log.follow true
+
+# Show decorations (branch/tag names) in log by default
+echo "🎭 Enabling decorations in git log"
+git config --global log.decorate short
+
+# Format output in columns when possible
+echo "📋 Enabling columnar output formatting"
+git config --global column.ui auto
+
 # Enables automatic command correction with a delay of 1.0 seconds.
 echo "🔧 Enabling automatic command correction (1.0s delay)"
 git config --global help.autocorrect 10
+
+# =============================================================================
+# PERFORMANCE OPTIMIZATIONS
+# =============================================================================
+
+# Enable filesystem monitoring for faster git operations
+echo "⚡ Enabling filesystem monitoring for performance"
+git config --global core.fsmonitor true
+
+# Cache untracked files for faster status operations
+echo "💨 Enabling untracked file caching for performance"
+git config --global core.untrackedCache true
 
 # =============================================================================
 # SECURITY AND INTEGRITY
