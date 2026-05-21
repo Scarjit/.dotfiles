@@ -232,6 +232,7 @@ echo "🔄 Adding workflow aliases"
 git config --global alias.acp '!f() { git add . && git commit -m "$1" && git pull ; git push; }; f'
 git config --global alias.acps '!f() { git add . && git commit --no-verify -m "$1" && git pull ; git push --no-verify; }; f'
 git config --global alias.staging '!f() { git pull; git push ; git checkout staging && git pull;}; f'
+git config --global alias.develop '!f() { git pull; git push ; git checkout develop && git pull;}; f'
 git config --global alias.master '!f() { git pull; git push ; git checkout master && git pull;}; f'
 git config --global alias.b '!f() { git add . && git checkout -b "$1"; }; f'
 
